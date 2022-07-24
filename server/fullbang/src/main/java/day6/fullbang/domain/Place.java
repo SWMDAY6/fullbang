@@ -33,9 +33,8 @@ public class Place {
     @Column(name = "place_name")
     private String name;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "place_type")
-    private PlaceType type;
+    private String type;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
@@ -44,8 +43,6 @@ public class Place {
     private String contactInfo;
 
     private String detailInfo;
-
-    private Boolean smokingAvailability;
 
     private int yanolja_id;
     private int yget_id;
