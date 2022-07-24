@@ -1,35 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
-import styled from 'styled-components';
-import background_hotel from '../../../assets/background_hotel.png';
-import motel_icon from '../../../assets/motel_icon.png';
-import pension_icon from '../../../assets/pension_icon.png';
-import hotel_icon from '../../../assets/hotel_icon.png';
-import map_icon from '../../../assets/map_icon.png';
-import logo_copyright from '../../../assets/logo_copyright.png';
-import filter_icon from '../../../assets/filter_icon.png';
-import place_icon from '../../../assets/place_icon.png';
-import './MainPage.css';
-import HeaderComponent from '../HeaderComponent/HeaderComponent';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import background_hotel from "../../../assets/background_hotel.png";
+import motel_icon from "../../../assets/motel_icon.png";
+import pension_icon from "../../../assets/pension_icon.png";
+import hotel_icon from "../../../assets/hotel_icon.png";
+import map_icon from "../../../assets/map_icon.png";
+import logo_copyright from "../../../assets/logo_copyright.png";
+import filter_icon from "../../../assets/filter_icon.png";
+import place_icon from "../../../assets/place_icon.png";
+import "./MainPage.css";
+import HeaderComponent from "../HeaderComponent/HeaderComponent";
 
 const Main = () => {
   const [location, setLocation] = useState({
     latitude: 37.3595704,
     longitude: 127.105399,
   });
-  const [address, setAddress] = useState('경기도 성남시 분당구 정자동');
+  const [address, setAddress] = useState("경기도 성남시 분당구 정자동");
   const [adult, setAdult] = useState(1);
 
   const locationToAddress = () => {
     const url =
-      'https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?input_coord=WGS84&y=' +
+      "https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?input_coord=WGS84&y=" +
       location.latitude +
-      '&x=' +
+      "&x=" +
       location.longitude;
-    // console.log(url);
+    console.log(url);
     return fetch(url, {
       headers: {
-        Authorization: 'KakaoAK ',
+        Authorization:
+          "KakaoAK " + process.env.REACT_APP_REST_API_KAKAO_API_KEY,
       },
     })
       .then((response) => response.json())
@@ -76,7 +77,7 @@ const Main = () => {
         return coords;
       });
     }
-    console.info('GPS를 지원하지 않습니다');
+    console.info("GPS를 지원하지 않습니다");
     setLocation({
       latitude: 37.3595704,
       longitude: 127.105399,
@@ -168,7 +169,7 @@ const Main = () => {
                   <span className="avgPriceNumber">
                     {avg.price_low
                       .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                   </span>
                   원 부터
                 </div>
@@ -176,7 +177,7 @@ const Main = () => {
                   <span className="avgPriceNumber">
                     {avg.price_high
                       .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                   </span>
                   원
                 </div>
@@ -285,8 +286,8 @@ const Footer = styled.div`
 `;
 
 const AVERAGE = [
-  { name: '모텔 평균', price_low: 49000, price_high: 490000, people: 2 },
-  { name: '호텔 평균', price_low: 49000, price_high: 490000, people: 2 },
-  { name: '펜션 평균', price_low: 49000, price_high: 490000, people: 2 },
-  { name: '리조트 평균', price_low: 49000, price_high: 490000, people: 2 },
+  { name: "모텔 평균", price_low: 49000, price_high: 490000, people: 2 },
+  { name: "호텔 평균", price_low: 49000, price_high: 490000, people: 2 },
+  { name: "펜션 평균", price_low: 49000, price_high: 490000, people: 2 },
+  { name: "리조트 평균", price_low: 49000, price_high: 490000, people: 2 },
 ];
