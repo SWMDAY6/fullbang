@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { setConstantValue } from 'typescript';
-import { propsType } from '../LandingPage';
+import React, { useEffect, useState } from "react";
+import { setConstantValue } from "typescript";
+import { propsType } from "../LandingPage";
 
 interface placeType {
   road_address_name: string;
@@ -26,14 +26,14 @@ const Map = (props: propsType) => {
   });
 
   const [address, setAddress] = useState({
-    region_1depth_name: '서울',
-    region_2depth_name: '강남구',
-    region_3depth_name: '역삼동',
+    region_1depth_name: "서울",
+    region_2depth_name: "강남구",
+    region_3depth_name: "역삼동",
   });
 
   // 검색어가 바뀔 때마다 재렌더링되도록 useEffect 사용
   useEffect(() => {
-    const mapContainer = document.getElementById('map');
+    const mapContainer = document.getElementById("map");
     const mapOption = {
       center: new kakao.maps.LatLng(state.center.lat, state.center.lng), // 지도의 중심좌표
       level: 3, // 지도의 확대 레벨
@@ -63,12 +63,12 @@ const Map = (props: propsType) => {
 
         function addMarker(position: any, idx: number, title: undefined) {
           var imageSrc =
-              'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커 이미지 url, 스프라이트 이미지
+              "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png", // 마커 이미지 url, 스프라이트 이미지
             imageSize = new kakao.maps.Size(36, 37), // 마커 이미지의 크기
             imgOptions = {
+              spriteSize: new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
               spriteOrigin: new kakao.maps.Point(0, idx * 46 + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
               offset: new kakao.maps.Point(13, 37), // 마커 좌표에 일치시킬 이미지 내에서의 좌표
-              spriteSize: new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
             },
             markerImage = new kakao.maps.MarkerImage(
               imageSrc,
@@ -79,8 +79,11 @@ const Map = (props: propsType) => {
               position: position, // 마커의 위치
               image: markerImage,
             });
+
           marker.setMap(map); // 지도 위에 마커를 표출
           markers.push(marker); // 배열에 생성된 마커를 추가
+
+          return marker;
         }
       });
     }

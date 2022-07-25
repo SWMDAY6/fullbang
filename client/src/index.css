@@ -60,8 +60,8 @@ Global Styles
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background: var(--clr-grey-10);
   color: var(--clr-grey-1);
   line-height: 1.5;
@@ -335,65 +335,4 @@ Sidebar
 
 .social-icons a:hover {
   color: var(--clr-primary-1);
-}
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--clr-white);
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  row-gap: 1rem;
-  box-shadow: var(--clr-red-dark);
-  transition: var(--transition);
-  transform: translate(-100%);
-}
-
-.show-sidebar {
-  transform: translate(0);
-  z-index: 1000;
-}
-
-@media screen and (min-width: 676px) {
-  .sidebar {
-    width: 150px;
-  }
-
-  .detailsidebar {
-    width: 200px;
-  }
-}
-
-.detailsidebar {
-  position: fixed;
-  top: 0;
-  left: 150px;
-  height: 100%;
-  background: var(--clr-white);
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  row-gap: 1rem;
-  box-shadow: var(--clr-red-dark);
-  /* transition: var(--transition); */
-  /* transform: translate(-100%); */
-}
-
-.show-detailsidebar {
-  transform: translate(0);
-  z-index: 1000;
-}
-
-html,
-div#root,
-div.map,
-div.landing-page,
-div.landing-page .landing-page__inner,
-main,
-div .landing-page .landing-page__inner .map-container,
-div .landing-page .landing-page__inner .map-container .map {
-  width: 100%;
-  height: 100%;
 }

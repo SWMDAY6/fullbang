@@ -1,5 +1,147 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--clr-white);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  row-gap: 1rem;
+  box-shadow: var(--clr-red-dark);
+  transition: var(--transition);
+  transform: translate(-100%);
+}
+
+.show-sidebar {
+  transform: translate(0);
+  z-index: 1000;
+}
+
+@media screen and (min-width: 676px) {
+  .sidebar {
+    width: 150px;
+  }
+
+  .detailsidebar {
+    width: 200px;
+  }
+}
+
+.detailsidebar {
+  position: fixed;
+  top: 0;
+  left: 150px;
+  height: 100%;
+  background: var(--clr-white);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  row-gap: 1rem;
+  box-shadow: var(--clr-red-dark);
+  /* transition: var(--transition); */
+  /* transform: translate(-100%); */
+}
+
+.show-detailsidebar {
+  transform: translate(0);
+  z-index: 1000;
+}
+
+html,
+div#root,
+div.map,
+div.landing-page,
+div.landing-page .landing-page__inner,
+main,
+div .landing-page .landing-page__inner .map-container,
+div .landing-page .landing-page__inner .map-container .map {
+  width: 100%;
+  height: 100%;
+}
 .SearchComponent {
   width: 100%;
   height: 65px;
   background-color: #001655;
+  padding-top: 19px;
+}
+
+#selectAddress,
+#peopleNumber,
+#Parking {
+  float: left;
+}
+
+#selectAddress {
+  margin-left: 447px;
+}
+
+#selectAddress select {
+  width: 88px;
+  height: 28px;
+  border: 1px solid #c7c7c7;
+  margin-left: 9px;
+  text-align: center;
+}
+#peopleNumber {
+  display: flex;
+  align-items: center;
+  margin-left: 314px;
+}
+#peopleNumber div {
+  margin-left: 18px;
+}
+#peopleNumber button {
+  float: left;
+  margin-left: 18px;
+}
+#peopleNumber #people {
+  /* width: 8px; */
+  font-weight: 700;
+  font-size: 12px;
+  text-align: center;
+  margin-left: 18px;
+}
+#peopleNumber #peopleMinusButton {
+  background: none;
+  border: none;
+}
+#peopleNumber #peoplePlusButton {
+  background: none;
+  border: none;
+}
+#peopleNumber div {
+  color: white;
+  float: left;
+}
+
+#Parking {
+  margin-left: 40px;
+}
+
+#Parking label {
+  color: white;
+  margin-left: 4px;
+}
+
+#Parking #parkingUnable {
+  margin-left: 12px;
+}
+
+#clear {
+  float: left;
+  margin-left: 18px;
+  width: 69px;
+  height: 23px;
+  left: calc(50% - 69px / 2 + 459.5px);
+  top: calc(50% - 23px / 2 - 422.5px);
+
+  background: #f5a200;
+  border-radius: 4px;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 11px;
+  line-height: 12px;
+  text-align: center;
+
+  color: #ffffff;
 }
