@@ -263,8 +263,8 @@ const PromotionWrap = styled.div`
 
 const AverageWrap = styled.div`
   height: 530px;
-  padding-left: 230px;
-  padding-right: 230px;
+  padding-left: calc(50% - 499.5px);
+  padding-right: calc(50% - 499.5px);
 `;
 
 const AverageBox = styled.div`
