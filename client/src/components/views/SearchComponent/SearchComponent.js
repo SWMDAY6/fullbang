@@ -4,6 +4,8 @@ import {
   bubjungdong_sigungu,
   bubjungdong_dong,
 } from "./bubjungdong";
+import button_minus from "../../../assets/button_minus.png";
+import button_plus from "../../../assets/button_plus.png";
 
 const SearchComponent = () => {
   const [sido, setSido] = useState();
@@ -29,7 +31,7 @@ const SearchComponent = () => {
     setParkingUnable(!parkingUnable);
   };
   const clearHandler = () => {
-    // this.select.clearValue();
+    setSido();
     setSigungu();
     setDong();
     setPeopleNum(1);
@@ -40,20 +42,20 @@ const SearchComponent = () => {
     <div className="SearchComponent">
       <div id="selectAddress">
         <select id="sido" onChange={handleSido} value={sido}>
-          <option value="">선택</option>
+          <option value="">시/도</option>
           {bubjungdong_sido.map((data, idx) => {
             return <option value={data.sido}>{data.codeNM}</option>;
           })}
         </select>
         <select id="sigugun" onChange={handleSigungu}>
-          <option value="">선택</option>
+          <option value="">시/군/구</option>
           {bubjungdong_sigungu.map((data, idx) => {
             if (data.sido === sido)
               return <option value={data.sigungu}>{data.codeNM}</option>;
           })}
         </select>
         <select id="dong" onChange={handleDong}>
-          <option value="">선택</option>
+          <option value="">읍/면/동</option>
           {bubjungdong_dong.map((data, idx) => {
             if (data.sido === sido && data.sigungu === sigungu)
               return <option value={data.dong}>{data.codeNM}</option>;
@@ -68,18 +70,20 @@ const SearchComponent = () => {
               setPeopleNum(peopleNum - 1);
             }
           }}
+          id="peopleMinusButton"
         >
-          -
+          <img src={button_minus} />
         </button>
-        <div>{peopleNum}</div>
+        <div id="peopleNum">{peopleNum}</div>
         <button
           onClick={() => {
             if (peopleNum < 9) {
               setPeopleNum(peopleNum + 1);
             }
           }}
+          id="peoplePlusButton"
         >
-          +
+          <img src={button_plus} />
         </button>
       </div>
       <div id="Parking">
