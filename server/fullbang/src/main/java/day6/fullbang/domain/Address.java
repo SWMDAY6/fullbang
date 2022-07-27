@@ -8,15 +8,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "address")
+@Table(name = "address",
+    uniqueConstraints={
+        @UniqueConstraint(
+            columnNames={"latitude", "longitude"}
+        )
+    })
 public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "address_id")
-    private int id;
+    private Long id;
 
     @OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
     private Place place;

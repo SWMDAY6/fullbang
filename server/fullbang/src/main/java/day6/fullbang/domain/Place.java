@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.Cleanup;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -48,8 +49,10 @@ public class Place {
 
     private Boolean parkingAvailability;
 
-    private int yanolja_id;
-    private int yget_id;
+    @Column(unique = true)
+    private Long yanolja_id;
+    @Column(unique = true)
+    private Long yget_id;
 
     private LocalDateTime crawledAt;
 

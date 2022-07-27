@@ -24,7 +24,7 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "room_id")
-    private int id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "place_id")
@@ -36,8 +36,8 @@ public class Room {
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Image> images;
 
-    private int standardCapacity;
-    private int maximumCapacity;
+    private Integer standardCapacity;
+    private Integer maximumCapacity;
 
     @Column(columnDefinition = "LONGTEXT")
     private String useInfo;
