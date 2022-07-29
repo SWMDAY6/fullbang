@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import HeaderComponent from '../HeaderComponent/HeaderComponent';
-import SearchComponent from '../SearchComponent/SearchComponent';
-import Sidebar from '../sidebar/Sidebar';
-import SidebarMapDetail from '../sidebar/SidebarMapDetail';
-import SidebarMyPageDetail from '../sidebar/SidebarMyPageDetail';
-import SidebarSearchDetail from '../sidebar/SidebarSearchDetail';
-import Map from './Sections/Map';
-import './LandingPage.css';
+import React, { useState } from "react";
+import HeaderComponent from "../HeaderComponent/HeaderComponent";
+import SearchComponent from "../SearchComponent/SearchComponent";
+import Sidebar from "../sidebar/Sidebar";
+import SidebarMapDetail from "../sidebar/SidebarMapDetail";
+import SidebarMyPageDetail from "../sidebar/SidebarMyPageDetail";
+import SidebarSearchDetail from "../sidebar/SidebarSearchDetail";
+import Map from "./Sections/Map";
+import "./LandingPage.css";
 
 export interface propsType {
   searchKeyword: string;
@@ -14,9 +14,9 @@ export interface propsType {
 
 const LandingPage = (): JSX.Element => {
   // 입력 폼 변화 감지하여 입력 값 관리
-  const [Value, setValue] = useState('');
+  const [Value, setValue] = useState("");
   // 제출한 검색어 관리
-  const [Keyword, setKeyword] = useState('');
+  const [Keyword, setKeyword] = useState("");
 
   // 입력 폼 변화 감지하여 입력 값을 state에 담아주는 함수
   // const keywordChange = (e: {
@@ -44,10 +44,7 @@ const LandingPage = (): JSX.Element => {
     <>
       <HeaderComponent />
       <SearchComponent />
-      {/* <Sidebar /> */}
-      {/* <SidebarMapDetail />
-            <SidebarMyPageDetail />
-            <SidebarSearchDetail /> */}
+      <Sidebar />
       <div className="landing-page">
         <div className="landing-page__inner">
           <Map searchKeyword={Keyword} />

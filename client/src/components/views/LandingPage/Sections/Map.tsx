@@ -18,8 +18,8 @@ const Map = (props: propsType) => {
   let markers: any[] = [];
   const [state, setState] = useState({
     center: {
-      lng: 126.9786567,
-      lat: 37.566826,
+      lng: 127.0447333,
+      lat: 37.5036883,
     },
     errMsg: null,
     isLoading: true,
@@ -56,6 +56,7 @@ const Map = (props: propsType) => {
           state.center.lat,
           state.center.lng
         );
+        console.log(state);
         const marker = addMarker(placePosition, 0, undefined);
         const bounds = new kakao.maps.LatLngBounds();
         bounds.extend(placePosition);

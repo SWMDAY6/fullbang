@@ -266,12 +266,6 @@ Modal
 Sidebar
 ===============
 */
-.sidebar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 1.5rem;
-}
 
 .close-btn {
   font-size: 1.75rem;
