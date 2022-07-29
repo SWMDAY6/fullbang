@@ -12,9 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.Getter;
+import day6.fullbang.dto.response.PriceInfoDto;
 
-@Getter // TODO refactoring
 @Entity
 @Table(name = "product")
 public class Product {
@@ -42,4 +41,8 @@ public class Product {
     private LocalDateTime checkOutDateTime;
 
     private LocalDateTime crawledAt;
+
+    public PriceInfoDto toPriceInfoDto() {
+        return new PriceInfoDto(room.getPlaceName(), room.getName(), price, checkInDateTime.toLocalDate());
+    }
 }
