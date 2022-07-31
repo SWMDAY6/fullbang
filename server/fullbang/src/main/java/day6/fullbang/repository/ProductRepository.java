@@ -30,9 +30,24 @@ public class ProductRepository {
     public List<Product> findByPlaceName(String placeName, LocalDate date) {
 
         return em.createQuery(
-            "select p from Product p where p.room.place.name = :placeName and p.checkInDateTime >= :checkInDate and p.checkOutDateTime < :checkOutDate",
+            "select p from Product p where p.room.place.name = :placeName "
+                + "and p.checkInDateTime >= :checkInDate "
+                + "and p.checkOutDateTime < :checkOutDate",
             Product.class)
             .setParameter("placeName", placeName)
+            .setParameter("checkInDate", date.atStartOfDay())
+            .setParameter("checkOutDate", date.plusDays(2).atStartOfDay())
+            .getResultList();
+    }
+
+    public List<Product> findByPlaceId(Long placeId, LocalDate date) {
+
+        return em.createQuery(
+            "select p from Product p where p.room.place.id = :placeId "
+                + "and p.checkInDateTime >= :checkInDate "
+                + "and p.checkOutDateTime < :checkOutDate",
+            Product.class)
+            .setParameter("placeId", placeId)
             .setParameter("checkInDate", date.atStartOfDay())
             .setParameter("checkOutDate", date.plusDays(2).atStartOfDay())
             .getResultList();
