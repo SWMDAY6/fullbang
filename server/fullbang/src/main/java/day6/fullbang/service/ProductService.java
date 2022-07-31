@@ -26,4 +26,9 @@ public class ProductService {
         LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
         return productRepository.findByPlaceName(placeName, localDate);
     }
+
+    public List<Product> findByPlaceId(Long placeId, String date) {
+        LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
+        return productRepository.findByPlaceId(placeId, localDate);
+    }
 }
