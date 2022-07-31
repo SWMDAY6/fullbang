@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import day6.fullbang.domain.Place;
 import day6.fullbang.domain.Product;
 import day6.fullbang.dto.response.PriceInfoDto;
+import day6.fullbang.service.PlaceService;
 import day6.fullbang.service.ProductService;
 import lombok.RequiredArgsConstructor;
 
@@ -19,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class MarketPriceController {
 
     private final ProductService productService;
+    private final PlaceService placeService;
 
     @GetMapping("/price/{id}")
     @ResponseBody
@@ -39,6 +42,22 @@ public class MarketPriceController {
 
         for (Product product : products) {
             priceInfos.add(product.toPriceInfoDto());
+        }
+
+        return priceInfos;
+    }
+
+    @GetMapping("/market-price")
+    @ResponseBody
+    public List<PriceInfoDto> getPriceByAddressCode(@RequestParam(name = "address_code_head") String addressCodeHead,
+        @RequestParam String date) {
+
+        List<Place> places = placeService.findByAddressCode(addressCodeHead);
+        List<PriceInfoDto> priceInfos = new ArrayList<>();
+
+        for (Place place : places) {
+            productService.findByPlaceId(place.getId(), date)
+                .forEach(product -> priceInfos.add(product.toPriceInfoDto()));
         }
 
         return priceInfos;
