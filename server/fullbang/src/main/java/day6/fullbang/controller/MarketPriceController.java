@@ -45,9 +45,9 @@ public class MarketPriceController {
         return priceInfos;
     }
 
-    @GetMapping("/price")
+    @GetMapping("/price/{addressCodeHead}")
     @ResponseBody
-    public List<PriceInfoDto> getPriceByAddressCode(@RequestParam(name = "address_code_head") String addressCodeHead,
+    public List<PriceInfoDto> getPriceByAddressCode(@PathVariable(name = "addressCodeHead") String addressCodeHead,
         @RequestParam String date) {
 
         List<Place> places = placeService.findByAddressCode(addressCodeHead);
@@ -76,6 +76,6 @@ public class MarketPriceController {
 
         // TODO refactor above duplicate code with getPriceByAddressCode()
 
-        return productService.getMarketPrice(priceInfos); // TODO implement getMarketPrice()
+        return productService.getMarketPrice(priceInfos);
     }
 }
