@@ -2,18 +2,22 @@ package day6.fullbang.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class MarketPriceDto {
 
-    private final String region1DepthName;
-    private final String region2DepthName;
-    private final String region3DepthName;
-    private final String addressCode;
+    private String region1DepthName;
+    private String region2DepthName;
+    private String region3DepthName;
+    private String addressCode;
 
-    private final Integer mean;
-    private final Integer startPointOfConfidenceInterval;
-    private final Integer endPointOfConfidenceInterval;
-    private final Integer meanOfConfidenceInterval;
+    private Double mean;
+    private Double startPointOfConfidenceInterval;
+    private Double endPointOfConfidenceInterval;
+    private Double confidenceLevel;
 }
