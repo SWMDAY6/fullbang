@@ -47,7 +47,7 @@ public class MarketPriceController {
         return priceInfos;
     }
 
-    @GetMapping("/market-price")
+    @GetMapping("/price")
     @ResponseBody
     public List<PriceInfoDto> getPriceByAddressCode(@RequestParam(name = "address_code_head") String addressCodeHead,
         @RequestParam String date) {
