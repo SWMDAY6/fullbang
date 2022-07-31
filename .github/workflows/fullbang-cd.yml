@@ -1,0 +1,55 @@
+name: fullbang-application CD
+
+on:
+  push:
+    branches: [ main ] 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2 
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1 # 최신 버전을 쓰고 싶었으나 이슈가 생겨서 기존에 CI에서 쓰던 버전 사용
+        with:
+          java-version: 11
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+        shell: bash
+
+      - name: Build with Gradle
+        run: ./gradlew clean build
+        shell: bash
+
+      - name: Get current time
+        uses: 1466587594/get-current-time@v2
+        id: current-time
+        with:
+          format: YYYY-MM-DDTHH-mm-ss 
+          utcOffset: "+09:00" 
+
+
+      - name: Generate deployment package 
+        run: |
+          mkdir -p deploy
+          cp build/libs/*.jar deploy/application.jar 
+          cp Procfile deploy/Procfile
+          cp -r .ebextensions deploy/.ebextensions
+          cp -r .platform deploy/.platform
+          cd deploy && zip -r deploy.zip . 
+
+      - name: Beanstalk Deploy
+        uses: einaregilsson/beanstalk-deploy@v20
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }} 
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
+          application-name: fullbang-application
+          environment_name: Fullbangapplication-env-1
+          version_label: Github Action-${{steps.current-time.outputs.formattedTime}}
+          region: ap-northeast-2
+          deployment_package: deploy/deploy.zip
+          wait_for_environment_recovery: 180 
