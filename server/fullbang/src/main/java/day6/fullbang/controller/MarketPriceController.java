@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import day6.fullbang.domain.Place;
 import day6.fullbang.domain.Product;
+import day6.fullbang.dto.response.MarketPriceDto;
 import day6.fullbang.dto.response.PriceInfoDto;
 import day6.fullbang.service.PlaceService;
 import day6.fullbang.service.ProductService;
@@ -26,10 +27,7 @@ public class MarketPriceController {
     @GetMapping("/price/{id}")
     @ResponseBody
     public PriceInfoDto getPriceByProductId(@PathVariable(name = "id") Long id) {
-
-        Product product = productService.findOne(id);
-
-        return product.toPriceInfoDto();
+        return productService.findOne(id).toPriceInfoDto();
     }
 
     @GetMapping("/price")
@@ -61,5 +59,23 @@ public class MarketPriceController {
         }
 
         return priceInfos;
+    }
+
+    @GetMapping("/market-price")
+    @ResponseBody
+    public MarketPriceDto getMarketPrice(@RequestParam(name = "address_code_head") String addressCodeHead,
+        @RequestParam String date) {
+
+        List<Place> places = placeService.findByAddressCode(addressCodeHead);
+        List<PriceInfoDto> priceInfos = new ArrayList<>();
+
+        for (Place place : places) {
+            productService.findByPlaceId(place.getId(), date)
+                .forEach(product -> priceInfos.add(product.toPriceInfoDto()));
+        }
+
+        // TODO refactor above duplicate code with getPriceByAddressCode()
+
+        return productService.getMarketPrice(priceInfos); // TODO implement getMarketPrice()
     }
 }
