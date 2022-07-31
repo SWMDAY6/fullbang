@@ -10,6 +10,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import lombok.Getter;
+
 @Entity
 @Table(name = "address",
     uniqueConstraints = {
@@ -17,6 +19,7 @@ import javax.persistence.UniqueConstraint;
             columnNames = {"latitude", "longitude"}
         )
     })
+@Getter
 public class Address {
 
     @Id
