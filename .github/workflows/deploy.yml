@@ -27,14 +27,19 @@ jobs:
         shell: bash
         working-directory: ${{ env.working-directory }}
 
-      - name: Set application.properties
-        uses: microsoft/variable-substitution@v1
+      - name: Write value to Properties-file
+        uses: christian-draeger/write-properties@1.1.0
         with:
-          files: server/fullbang/src/main/resources/application.properties
-        env:
-          spring.datasource.url: ${{ secrets.DATASOURCE_URL }}
-          spring.datasource.username: ${{ secrets.DATASOURCE_USERNAME }}
-          spring.datasource.password: ${{ secrets.DATASOURCE_PASSWORD }}
+          path: 'server/fullbang/src/main/resources/application.properties'
+          property: |
+            'spring.datasource.url'
+            'spring.datasource.username'
+            'spring.datasource.password'
+          value: |
+            ${{ secrets.DATASOURCE_URL }}
+            ${{ secrets.DATASOURCE_USERNAME }}
+            ${{ secrets.DATASOURCE_PASSWORD }}
+
 
       - name: Test application.properties
         run: cat server/fullbang/src/main/resources/application.properties
