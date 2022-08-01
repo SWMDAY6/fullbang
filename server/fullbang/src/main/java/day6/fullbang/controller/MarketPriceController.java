@@ -66,15 +66,10 @@ public class MarketPriceController {
     public MarketPriceDto getMarketPrice(@RequestParam(name = "address_code_head") String addressCodeHead,
         @RequestParam String date) {
 
-        List<Place> places = placeService.findByAddressCode(addressCodeHead);
         List<PriceInfoDto> priceInfos = new ArrayList<>();
 
-        for (Place place : places) {
-            productService.findByPlaceId(place.getId(), date)
-                .forEach(product -> priceInfos.add(product.toPriceInfoDto()));
-        }
-
-        // TODO refactor above duplicate code with getPriceByAddressCode()
+        productService.findByAddressCode(addressCodeHead, date)
+            .forEach(product -> priceInfos.add(product.toPriceInfoDto()));
 
         return productService.getMarketPrice(priceInfos);
     }

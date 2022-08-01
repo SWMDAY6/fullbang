@@ -45,9 +45,22 @@ public class ProductRepository {
         return em.createQuery(
             "select p from Product p where p.room.place.id = :placeId "
                 + "and p.checkInDateTime >= :checkInDate "
-                + "and p.checkOutDateTime < :checkOutDate",
+                + "and p.checkOutDateTime < :checkOutDate ",
             Product.class)
             .setParameter("placeId", placeId)
+            .setParameter("checkInDate", date.atStartOfDay())
+            .setParameter("checkOutDate", date.plusDays(2).atStartOfDay())
+            .getResultList();
+    }
+
+    public List<Product> findByAddressCode(String addressCode, LocalDate date) {
+
+        return em.createQuery(
+            "select p from Product p where p.room.place.address.addressCode like :addressCodeRegex "
+                + "and p.checkInDateTime >= :checkInDate "
+                + "and p.checkOutDateTime < :checkOutDate ",
+            Product.class)
+            .setParameter("addressCodeRegex", addressCode + "%")
             .setParameter("checkInDate", date.atStartOfDay())
             .setParameter("checkOutDate", date.plusDays(2).atStartOfDay())
             .getResultList();

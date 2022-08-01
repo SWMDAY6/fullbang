@@ -38,6 +38,11 @@ public class ProductService {
         return productRepository.findByPlaceId(placeId, localDate);
     }
 
+    public List<Product> findByAddressCode(String addressCodeHead, String date) {
+        LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
+        return productRepository.findByAddressCode(addressCodeHead, localDate);
+    }
+
     public MarketPriceDto getMarketPrice(List<PriceInfoDto> priceInfos) {
 
         MarketPriceDto marketPriceDto = new MarketPriceDto();
