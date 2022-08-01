@@ -9,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest # (3)
+    
+    env:
+      working-directory: ./server/fullbang
 
     steps:
       - name: Checkout
@@ -20,9 +23,12 @@ jobs:
           java-version: 1.8
 
       - name: Grant execute permission for gradlew
-        run: chmod +x server/fullbang/gradlew # (6)
+        run: chmod +x ./gradlew # (6)
         shell: bash
+        working-directory: ${{ env.working-directory }}
 
       - name: Build with Gradle
-        run: server/fullbang/gradlew clean build # (7)
+        run: ./gradlew clean build # (7)
         shell: bash
+        working-directory: ${{ env.working-directory }}
+        
