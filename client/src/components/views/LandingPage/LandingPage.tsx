@@ -12,6 +12,14 @@ export interface propsType {
   searchKeyword: string;
 }
 
+export interface AccomodationList {
+  name: string;
+  yanolja: number;
+  yeogiattae: number;
+  stars: number;
+  img_src: string;
+}
+
 const LandingPage = (): JSX.Element => {
   // 입력 폼 변화 감지하여 입력 값 관리
   const [Value, setValue] = useState("");
@@ -44,7 +52,7 @@ const LandingPage = (): JSX.Element => {
     <>
       <HeaderComponent />
       <SearchComponent />
-      <Sidebar />
+      <Sidebar AccomodationList={AccomodationList} />
       <div className="landing-page">
         <div className="landing-page__inner">
           <Map searchKeyword={Keyword} />
@@ -55,3 +63,46 @@ const LandingPage = (): JSX.Element => {
 };
 
 export default LandingPage;
+
+const AccomodationList = [
+  {
+    name: "페어필드 바이 메리어트 강남",
+    yanolja: 10835006,
+    yeogiattae: 118750,
+    stars: 9.3,
+    img_src:
+      "https://image.goodchoice.kr/resize_490x348/adimg_new/1/298386/16ff63278a75e0866797808ea2ff7094.jpg",
+  },
+  {
+    name: "페어필드 바이 메리어트 강남",
+    yanolja: 108356,
+    yeogiattae: 118750,
+    stars: 9.3,
+    img_src:
+      "https://image.goodchoice.kr/resize_490x348/adimg_new/1/298386/16ff63278a75e0866797808ea2ff7094.jpg",
+  },
+  {
+    name: "페어필드 바이 메리어트 강남",
+    yanolja: 10830056,
+    yeogiattae: 118750,
+    stars: 9.3,
+    img_src:
+      "https://image.goodchoice.kr/resize_490x348/adimg_new/1/298386/16ff63278a75e0866797808ea2ff7094.jpg",
+  },
+  {
+    name: "페어필드 바이 메리어트 강남",
+    yanolja: 108356,
+    yeogiattae: 1131238750,
+    stars: 9.3,
+    img_src:
+      "https://image.goodchoice.kr/resize_490x348/adimg_new/1/298386/16ff63278a75e0866797808ea2ff7094.jpg",
+  },
+  {
+    name: "페어필드 바이 메리어트 강남",
+    yanolja: 10830056,
+    yeogiattae: 118750,
+    stars: 9.3,
+    img_src:
+      "https://image.goodchoice.kr/resize_490x348/adimg_new/1/298386/16ff63278a75e0866797808ea2ff7094.jpg",
+  },
+];

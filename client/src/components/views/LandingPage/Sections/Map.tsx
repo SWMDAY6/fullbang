@@ -25,12 +25,6 @@ const Map = (props: propsType) => {
     isLoading: true,
   });
 
-  const [address, setAddress] = useState({
-    region_1depth_name: "서울",
-    region_2depth_name: "강남구",
-    region_3depth_name: "역삼동",
-  });
-
   // 검색어가 바뀔 때마다 재렌더링되도록 useEffect 사용
   useEffect(() => {
     const mapContainer = document.getElementById("map");
@@ -41,6 +35,20 @@ const Map = (props: propsType) => {
 
     // 지도를 생성
     const map = new kakao.maps.Map(mapContainer, mapOption);
+
+    var clusterer = new kakao.maps.MarkerClusterer({
+      map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+      averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+      minLevel: 3, // 클러스터 할 최소 지도 레벨
+    });
+
+    kakao.maps.event.addListener(map, "dragend", function () {
+      console.log(map.getBounds().toString());
+    });
+
+    kakao.maps.event.addListener(map, "zoom_changed", function () {
+      console.log(map.getLevel());
+    });
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -61,6 +69,38 @@ const Map = (props: propsType) => {
         const bounds = new kakao.maps.LatLngBounds();
         bounds.extend(placePosition);
         map.setBounds(bounds);
+
+        // let placePosition1 = new kakao.maps.LatLng(
+        //   37.7575659813195,
+        //   128.896374441356
+        // );
+        // let placePosition2 = new kakao.maps.LatLng(
+        //   37.6370016637774,
+        //   129.044199898626
+        // );
+        // let placePosition3 = new kakao.maps.LatLng(
+        //   37.7538199534414,
+        //   128.88105925272
+        // );
+        // let placePosition4 = new kakao.maps.LatLng(
+        //   37.8034498292954,
+        //   128.901984192274
+        // );
+        // let placePosition5 = new kakao.maps.LatLng(
+        //   37.6562841195536,
+        //   128.764908717845
+        // );
+        // let placePosition6 = new kakao.maps.LatLng(
+        //   37.7961196768836,
+        //   128.911679779051
+        // );
+
+        // const marker1 = addMarker(placePosition1, 1, undefined);
+        // const marker2 = addMarker(placePosition2, 2, undefined);
+        // const marker3 = addMarker(placePosition3, 3, undefined);
+        // const marker4 = addMarker(placePosition4, 4, undefined);
+        // const marker5 = addMarker(placePosition5, 5, undefined);
+        // const marker6 = addMarker(placePosition6, 6, undefined);
 
         function addMarker(position: any, idx: number, title: undefined) {
           var imageSrc =
@@ -83,6 +123,7 @@ const Map = (props: propsType) => {
 
           marker.setMap(map); // 지도 위에 마커를 표출
           markers.push(marker); // 배열에 생성된 마커를 추가
+          clusterer.addMarkers(markers);
 
           return marker;
         }

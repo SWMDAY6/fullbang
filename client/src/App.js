@@ -1,6 +1,4 @@
-import React from 'react';
-import Router from './components/Router/Router';
-import MainPage from './components/views/MainPage/MainPage';
+import Router from "./components/Router/Router";
 
 function App() {
   return (
