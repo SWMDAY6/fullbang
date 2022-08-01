@@ -32,9 +32,9 @@ jobs:
         with:
           path: 'server/fullbang/src/main/resources/application.properties'
           property: |
-            'spring.datasource.url'
-            'spring.datasource.username'
-            'spring.datasource.password'
+            spring.datasource.url
+            spring.datasource.username
+            spring.datasource.password
           value: |
             ${{ secrets.DATASOURCE_URL }}
             ${{ secrets.DATASOURCE_USERNAME }}
