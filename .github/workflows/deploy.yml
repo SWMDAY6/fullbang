@@ -43,12 +43,6 @@ jobs:
       - name: Show Current Time
         run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}"
         shell: bash
-        
-      - name: buildfile-test
-        run: |
-          ls build/
-          ls build/libs/
-        working-directory: ${{ env.working-directory }}
 
       - name: Generate deployment package # (1)
         run: |
