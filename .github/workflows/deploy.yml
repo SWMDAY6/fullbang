@@ -27,11 +27,24 @@ jobs:
         shell: bash
         working-directory: ${{ env.working-directory }}
 
+      - name: Set application.properties
+        uses: microsoft/variable-substitution@v1
+        with:
+          files: server/fullbang/src/main/resources/application.properties
+        env:
+          spring.datasource.url: ${{ secrets.DATASOURCE_URL }}
+          spring.datasource.username: ${{ secrets.DATASOURCE_USERNAME }}
+          spring.datasource.password: ${{ secrets.DATASOURCE_PASSWORD }}
+
+      - name: Test application.properties
+        run: cat server/fullbang/src/main/resources/application.properties
+
+
       - name: Build with Gradle
         run: ./gradlew clean build # (7)
         shell: bash
         working-directory: ${{ env.working-directory }}
-        
+
         
       - name: Get current time
         uses: 1466587594/get-current-time@v2
