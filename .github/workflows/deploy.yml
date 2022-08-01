@@ -44,14 +44,19 @@ jobs:
         run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}"
         shell: bash
         
+      - name: buildfile-test
+        run: |
+          ls build/
+          ls build/libs/
+        working-directory: ${{ env.working-directory }}
+
       - name: Generate deployment package # (1)
         run: |
           mkdir -p deploy
-          cp build/libs/*.jar deploy/
-          mv deploy/*.jar deploy/application.jar
-          cp Procfile deploy/
-          cp -r .ebextensions deploy/
-          cp -r .platform deploy/
+          cp build/libs/*.jar deploy/application.jar
+          cp Procfile deploy/Procfile
+          cp -r .ebextensions deploy/.ebextensions
+          cp -r .platform deploy/.platform
           cd deploy && zip -r deploy.zip .
         working-directory: ${{ env.working-directory }}
 
